@@ -6,8 +6,8 @@
  
 String apiKey = "WM8RPHCC499OWC91";     //  Enter your Write API key from ThingSpeak
 int crash = 1;
-const char *ssid =  "Rizz";     // replace with your wifi ssid and wpa2 key
-const char *pass =  "directx11";
+const char *ssid =  "YOUR WIFI SSID";     // replace with your wifi ssid and wpa2 key
+const char *pass =  "YOUR WIFI PASSWORD";
 const char* server = "api.thingspeak.com";
  
 //Credentials for Google GeoLocation API...
@@ -15,7 +15,7 @@ const char* Host = "www.googleapis.com";
 String thisPage = "/geolocation/v1/geolocate?key=";
  
 // --- Get a google maps ap key here : https://developers.google.com/maps/documentation/geolocation/intro
-String key = "AIzaSyDC_knmxwS697JCNNW4EsD5kVNf4SDCrAI";
+String key = "GOOGLE GEOLOCATE API KEY";
  
 int status = WL_IDLE_STATUS;
 String jsonString = "{\n";
@@ -45,9 +45,9 @@ void setup()
   }
 
 
-  //Serial.println("Wifi Connected Success!");
-  //Serial.print("NodeMCU IP Address : ");
-  //Serial.println(WiFi.localIP() );
+  Serial.println("Wifi Connected Success!");
+  Serial.print("NodeMCU IP Address : ");
+  Serial.println(WiFi.localIP() );
   
 }
  
@@ -55,10 +55,9 @@ void loop()
 {
   char bssid[6];
   DynamicJsonBuffer jsonBuffer;
-  //Serial.println("scan start");
-  // WiFi.scanNetworks will return the number of networks found
+  Serial.println("scan start");
   int n = WiFi.scanNetworks();
- // Serial.println("scan done");
+ Serial.println("scan done");
   if (n == 0)
     Serial.println("no networks found");
   else
@@ -180,9 +179,10 @@ void loop()
  Serial.println();
  //Serial.println("Restarting...");
  Serial.println();
-
+//UNTIL here we got the values from geolocate
 //-------------------------------------------------------------------------------------------------------------------------------------------
-  WiFiClient client1;
+ //now we are sending them to thingsspeak server
+ WiFiClient client1;
   if (client1.connect(server,80))   //   "184.106.153.149" or api.thingspeak.com
 {                              
   String postStr = apiKey;
@@ -207,49 +207,6 @@ Serial.print("Not conected");
 client1.stop();
 Serial.println("Waiting...");
   
-  // thingspeak needs minimum 15 sec delay between updates, i've set it to 30 seconds
+  
   delay(2000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*Serial.print("arduino input :-");
-  if (client.connect(server,80))
-  {
-    String data1="GET /update?api_key="+apiKey+"&field1=";
-    String data2="GET /update?api_key="+apiKey+"&field2=";
-    String data3="GET /update?api_key="+apiKey+"&field3=";
-    int crash = 1;             ////analog read value
-    data1=data1+String(crash);
-    data1=data1+"HTTP/1.1\r\n"+"Host:"+server+"\r\n"+"Connection:close\r\n\r\n";
-    data2=data2+String(latitude);
-    data2=data2+"HTTP/1.1\r\n"+"Host:"+server+"\r\n"+"Connection:close\r\n\r\n";
-    data3=data3+String(longitude);
-    data3=data3+"HTTP/1.1\r\n"+"Host:"+server+"\r\n"+"Connection:close\r\n\r\n";
-    Serial.println(data2);              
-    client.print(data1);
-    client.print(data2);
-    client.print(data3);
-    delay(5000);
-
-    Serial.print("Crash: ");
-    Serial.println(crash); 
-    */
-
-  /*else
-  Serial.print("Not conected");
-  client.stop();
-  delay(15000);*/
 }
