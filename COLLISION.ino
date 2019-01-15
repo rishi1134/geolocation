@@ -4,7 +4,7 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
  
-String apiKey = "WM8RPHCC499OWC91";     //  Enter your Write API key from ThingSpeak
+String apiKey = "THINGSPEAK API";     //  Enter your Write API key from ThingSpeak
 int crash = 1;
 const char *ssid =  "YOUR WIFI SSID";     // replace with your wifi ssid and wpa2 key
 const char *pass =  "YOUR WIFI PASSWORD";
